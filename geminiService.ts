@@ -1,40 +1,33 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Tutor function to handle AI logic using Gemini.
-// Compliant with @google/genai SDK guidelines.
-export async function askTutor(prompt: string, context: string) {
-  // Ensure we use the latest API key and follow SDK initialization rules.
-  // Note: process.env.API_KEY is assumed to be available globally.
+export async function askTutor(prompt: string, context: string = "") {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-  const model = "gemini-3-flash-preview";
-
+  
   const systemInstruction = `
-    أنت مدرس ذكي متخصص لمساعدة الطلاب في مفاضلة ماجستير علوم الويب (MWS) في الجامعة الافتراضية السورية.
-    لديك معرفة عميقة في:
-    1. برمجة وتصميم الويب (HTML, CSS, JS, HTTP, DOM).
-    2. البرمجة والخوارزميات (Data Structures, Time Complexity, Recursion).
-    3. الشبكات (OSI Model, TCP/UDP, DNS, IP).
-    4. المترجمات (Lexical/Syntax Analysis, Compilers vs Interpreters).
+    أنت "مساعد MWS MASTER" - معلم ذكي وخبير في علوم الويب والبرمجة.
+    مهمتك: مساعدة الطلاب السوريين المتقدمين لماجستير علوم الويب (MWS).
     
-    استخدم السياق التالي للإجابة (إذا كان متاحاً): ${context}
-    أجب باللغة العربية بأسلوب تعليمي مبسط وواضح. إذا طلب الطالب كود برمجي، قدمه بشكل جميل.
+    القواعد:
+    1. أجب باللغة العربية بأسلوب تعليمي، مشجع، ومبسط.
+    2. إذا كان السؤال عن سؤال محدد، اشرح "لماذا" هذه هي الإجابة الصحيحة.
+    3. إذا طلب الطالب كوداً، استخدم Markdown بتنسيق جميل.
+    4. السياق الحالي للدراسة هو: ${context}
   `;
 
   try {
     const response = await ai.models.generateContent({
-      model,
+      model: "gemini-3-flash-preview",
       contents: prompt,
       config: {
         systemInstruction,
-        temperature: 0.7,
-      }
+        temperature: 0.8,
+      },
     });
 
-    // The .text property directly returns the generated string.
-    return response.text || "عذراً، لم أستطع توليد رد في الوقت الحالي.";
+    return response.text || "عذراً، لم أستطع معالجة الطلب حالياً.";
   } catch (error) {
-    console.error("Gemini Error:", error);
-    return "حدث خطأ أثناء التواصل مع المعلم الذكي. يرجى المحاولة لاحقاً.";
+    console.error("AI Error:", error);
+    return "حدث خطأ في الاتصال بالمعلم الذكي. يرجى التحقق من اتصال الإنترنت.";
   }
 }
