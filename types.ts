@@ -11,6 +11,7 @@ export interface Question {
   category: CategoryType;
   question: string;
   answer: string;
+  options?: string[];
   explanation?: string;
 }
 

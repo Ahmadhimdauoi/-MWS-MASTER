@@ -30,6 +30,18 @@ const QuestionCard = ({ question }: { question: Question }) => {
           {question.question}
         </h3>
 
+        {question.options && (
+          <div className="mb-6 space-y-2">
+            {question.options.map((opt, i) => (
+              <div
+                key={i}
+                className="text-sm p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600">
+                {opt}
+              </div>
+            ))}
+          </div>
+        )}
+
         {showAnswer ? (
           <div className="p-5 bg-indigo-50 rounded-2xl border border-indigo-100 text-indigo-900 animate-in fade-in zoom-in-95 duration-300">
             <div className="flex items-center gap-2 mb-2">
@@ -38,9 +50,14 @@ const QuestionCard = ({ question }: { question: Question }) => {
                 الإجابة النموذجية
               </span>
             </div>
-            <p className="font-medium text-[15px] leading-relaxed">
+            <p className="font-bold text-[16px] leading-relaxed mb-2">
               {question.answer}
             </p>
+            {question.explanation && (
+              <p className="text-sm opacity-80 border-t border-indigo-100 pt-2 mt-2 italic">
+                {question.explanation}
+              </p>
+            )}
           </div>
         ) : (
           <button
@@ -60,10 +77,10 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
 
   useEffect(() => {
-    // إذا كان الاختبار نهائياً، نعرض جميع الأسئلة الصنفية
-    // وإلا نختار 10 أسئلة عشوائية
     const isFinal = questions.some((q) => q.category === CategoryType.FINAL);
 
     if (isFinal) {
@@ -74,14 +91,31 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
     }
   }, [questions]);
 
-  const handleAnswer = (correct: boolean) => {
-    if (correct) setScore((s) => s + 1);
+  const handleOptionSelect = (option: string) => {
+    if (isAnswered) return;
+    const q = quizQuestions[currentIdx];
+    setSelectedOption(option);
+    setIsAnswered(true);
+    const correct = option.toLowerCase() === q.answer.toLowerCase();
+    if (correct) {
+      setScore((s) => s + 1);
+    }
+  };
+
+  const nextQuestion = () => {
     if (currentIdx < quizQuestions.length - 1) {
       setCurrentIdx((i) => i + 1);
       setShowResult(false);
+      setSelectedOption(null);
+      setIsAnswered(false);
     } else {
       setFinished(true);
     }
+  };
+
+  const handleManualAnswer = (correct: boolean) => {
+    if (correct) setScore((s) => s + 1);
+    nextQuestion();
   };
 
   if (quizQuestions.length === 0) return null;
@@ -130,6 +164,8 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
   }
 
   const q = quizQuestions[currentIdx];
+  const hasOptions = q.options && q.options.length > 0;
+
   return (
     <div className="max-w-2xl mx-auto py-8 px-4">
       <div className="mb-8 flex justify-between items-center">
@@ -144,33 +180,107 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
             }}></div>
         </div>
       </div>
-      <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-200 mb-8 min-h-[350px] flex flex-col justify-between">
-        <p className="text-2xl font-bold text-center text-slate-800 leading-relaxed">
+      <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-200 mb-8 min-h-[350px] flex flex-col">
+        <p className="text-2xl font-bold text-center text-slate-800 leading-relaxed mb-10">
           {q.question}
         </p>
-        {!showResult ? (
-          <button
-            onClick={() => setShowResult(true)}
-            className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black hover:bg-black transition-all">
-            كشف الإجابة
-          </button>
+
+        {hasOptions ? (
+          <div className="space-y-4 flex-1">
+            <div className="grid grid-cols-1 gap-3">
+              {q.options?.map((option, idx) => {
+                const isSelected = selectedOption === option;
+                const isCorrectOption =
+                  option.toLowerCase() === q.answer.toLowerCase();
+                let buttonStyle =
+                  "bg-slate-50 border-slate-100 text-slate-700 hover:border-indigo-300";
+
+                if (isAnswered) {
+                  if (isCorrectOption) {
+                    buttonStyle =
+                      "bg-emerald-50 border-emerald-500 text-emerald-700 shadow-sm shadow-emerald-100";
+                  } else if (isSelected) {
+                    buttonStyle =
+                      "bg-rose-50 border-rose-500 text-rose-700 shadow-sm shadow-rose-100";
+                  } else {
+                    buttonStyle =
+                      "bg-slate-50 border-slate-100 text-slate-400 opacity-50";
+                  }
+                } else if (isSelected) {
+                  buttonStyle =
+                    "bg-indigo-50 border-indigo-500 text-indigo-700";
+                }
+
+                return (
+                  <button
+                    key={idx}
+                    disabled={isAnswered}
+                    onClick={() => handleOptionSelect(option)}
+                    className={`w-full p-6 text-right rounded-2xl border-2 transition-all font-bold text-lg flex items-center justify-between ${buttonStyle}`}>
+                    <span>{option}</span>
+                    {isAnswered && isCorrectOption && (
+                      <CheckCircle2 size={24} className="text-emerald-500" />
+                    )}
+                    {isAnswered && isSelected && !isCorrectOption && (
+                      <X size={24} className="text-rose-500" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {isAnswered && (
+              <div className="mt-8 p-6 bg-slate-50 rounded-3xl border border-slate-100 animate-in fade-in slide-in-from-top-4">
+                <p className="text-slate-800 font-bold mb-2 text-xl">
+                  {selectedOption?.toLowerCase() === q.answer.toLowerCase()
+                    ? "إجابة صحيحة! 🎉"
+                    : "إجابة خاطئة ❌"}
+                </p>
+                {q.explanation && (
+                  <p className="text-slate-600 leading-relaxed text-lg">
+                    {q.explanation}
+                  </p>
+                )}
+                <button
+                  onClick={nextQuestion}
+                  className="mt-6 w-full py-5 bg-indigo-600 text-white rounded-2xl font-black hover:bg-indigo-700 transition-all shadow-xl">
+                  السؤال التالي
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
-          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-            <div className="p-6 bg-indigo-600 text-white rounded-3xl text-center font-bold">
-              {q.answer}
-            </div>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col justify-between flex-1">
+            {!showResult ? (
               <button
-                onClick={() => handleAnswer(true)}
-                className="py-4 bg-emerald-500 text-white rounded-2xl font-bold shadow-lg shadow-emerald-50">
-                أجبت بشكل صحيح
+                onClick={() => setShowResult(true)}
+                className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black hover:bg-black transition-all">
+                كشف الإجابة
               </button>
-              <button
-                onClick={() => handleAnswer(false)}
-                className="py-4 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-50">
-                أخطأت الإجابة
-              </button>
-            </div>
+            ) : (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+                <div className="p-6 bg-indigo-600 text-white rounded-3xl text-center font-bold text-xl">
+                  {q.answer}
+                </div>
+                {q.explanation && (
+                  <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-600">
+                    {q.explanation}
+                  </div>
+                )}
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => handleManualAnswer(true)}
+                    className="py-4 bg-emerald-500 text-white rounded-2xl font-bold shadow-lg shadow-emerald-50">
+                    أجبت بشكل صحيح
+                  </button>
+                  <button
+                    onClick={() => handleManualAnswer(false)}
+                    className="py-4 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-50">
+                    أخطأت الإجابة
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

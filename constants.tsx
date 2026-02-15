@@ -2739,100 +2739,203 @@ export const QUESTIONS: Question[] = [
   },
 
   // --- الاختبار النهائي (Final Exam) ---
-  { 
-    id: 'f1', 
-    category: CategoryType.FINAL, 
-    question: "Machine that places the request to access the data is generally called as...\n(Option: request machine, client machine, database server, server machine)", 
-    answer: "Client machine (الجهاز الذي يرسل الطلب للوصول إلى البيانات يسمى جهاز العميل)" 
+  {
+    id: "f1",
+    category: CategoryType.FINAL,
+    question:
+      "Machine that places the request to access the data is generally called as...",
+    answer: "client machine",
+    options: [
+      "request machine",
+      "client machine",
+      "database server",
+      "server machine",
+    ],
+    explanation: "الجهاز الذي يرسل الطلب للوصول إلى البيانات يسمى جهاز العميل",
   },
-  { 
-    id: 'f2', 
-    category: CategoryType.FINAL, 
-    question: "What is edge computing's role in cloud computing?\n(Option: Edge computing could act as an alternative to cloud computing, They are unrelated, Edge computing is the clouds silver lining -- or the edge of the cloud, They are the same)", 
-    answer: "Edge computing is the clouds silver lining -- or the edge of the cloud" 
+  {
+    id: "f2",
+    category: CategoryType.FINAL,
+    question: "What is edge computing's role in cloud computing?",
+    answer:
+      "Edge computing is the clouds silver lining -- or the edge of the cloud",
+    options: [
+      "Edge computing could act as an alternative to cloud computing",
+      "They are unrelated",
+      "Edge computing is the clouds silver lining -- or the edge of the cloud",
+      "They are the same",
+    ],
+    explanation: "الحوسبة الطرفية تعتبر امتداداً أو حافة للسحابة",
   },
-  { 
-    id: 'f3', 
-    category: CategoryType.FINAL, 
-    question: "A ________ is the client application request to retrieve data from a database or legacy API's.\n(Option: GraphQL query, GraphQL resolvers, both GraphQL resolvers and GraphQL schema, GraphQL schema)", 
-    answer: "GraphQL query" 
+  {
+    id: "f3",
+    category: CategoryType.FINAL,
+    question:
+      "A ________ is the client application request to retrieve data from a database or legacy API's.",
+    answer: "GraphQL query",
+    options: [
+      "GraphQL query",
+      "GraphQL resolvers",
+      "both GraphQL resolvers and GraphQL schema",
+      "GraphQL schema",
+    ],
+    explanation: "استعلام GraphQL هو طلب تطبيق العميل لاسترداد البيانات",
   },
-  { 
-    id: 'f4', 
-    category: CategoryType.FINAL, 
-    question: "RESTful services are a part of ________ architecture.\n(Option: Layered, Object based, Event based, Resource based)", 
-    answer: "Resource based (خدمات REST تعتمد على هيكلية الموارد)" 
+  {
+    id: "f4",
+    category: CategoryType.FINAL,
+    question: "RESTful services are a part of ________ architecture.",
+    answer: "Resource based",
+    options: ["Layered", "Object based", "Event based", "Resource based"],
+    explanation: "خدمات REST تعتمد على هيكلية الموارد",
   },
-  { 
-    id: 'f6', 
-    category: CategoryType.FINAL, 
-    question: "The ability to invoke a RESTful method multiple times without changing the state of the server on subsequent invocations is known as...\n(Option: Statefulness, Immutability, Uniformity, Idempotence)", 
-    answer: "Idempotence" 
+  {
+    id: "f6",
+    category: CategoryType.FINAL,
+    question:
+      "The ability to invoke a RESTful method multiple times without changing the state of the server on subsequent invocations is known as...",
+    answer: "Idempotence",
+    options: ["Statefulness", "Immutability", "Uniformity", "Idempotence"],
+    explanation:
+      "Idempotence تعني القدرة على استدعاء الطريقة عدة مرات دون تغيير حالة الخادم",
   },
-  { 
-    id: 'f7', 
-    category: CategoryType.FINAL, 
-    question: "Edge computing expected to improve?\n(Option: None of the mentioned, both a and b, b. save bandwidth, a. response times)", 
-    answer: "both a and b (الحوسبة الطرفية تحسن زمن الاستجابة وتوفر في النطاق الترددي)" 
+  {
+    id: "f7",
+    category: CategoryType.FINAL,
+    question: "Edge computing expected to improve?",
+    answer: "both a and b",
+    options: [
+      "None of the mentioned",
+      "both a and b",
+      "b. save bandwidth",
+      "a. response times",
+    ],
+    explanation: "الحوسبة الطرفية تحسن زمن الاستجابة وتوفر في النطاق الترددي",
   },
-  { 
-    id: 'f8', 
-    category: CategoryType.FINAL, 
-    question: "Does IOT gateway provide security for the network?\n(Option: Both of the mentioned, False, None of the mentioned, True)", 
-    answer: "True (تم اختيار هذه الإجابة صراحةً في الملف المرفق)" 
+  {
+    id: "f8",
+    category: CategoryType.FINAL,
+    question: "Does IOT gateway provide security for the network?",
+    answer: "True",
+    options: [
+      "Both of the mentioned",
+      "False",
+      "None of the mentioned",
+      "True",
+    ],
+    explanation: "نعم، توفر بوابة IOT الأمان للشبكة",
   },
-  { 
-    id: 'f11', 
-    category: CategoryType.FINAL, 
-    question: "If timestamps of two events are same, then the events are ________.\n(Option: monotonic, non-concurrent, non-monotonic, concurrent)", 
-    answer: "concurrent (تم اختيار هذه الإجابة صراحةً في الملف المرفق)" 
+  {
+    id: "f11",
+    category: CategoryType.FINAL,
+    question:
+      "If timestamps of two events are same, then the events are ________.",
+    answer: "concurrent",
+    options: ["monotonic", "non-concurrent", "non-monotonic", "concurrent"],
+    explanation: "إذا كان طابع الوقت لحدثين هو نفسه، فإنهما متزامنان",
   },
-  { 
-    id: 'f12', 
-    category: CategoryType.FINAL, 
-    question: "What is the full form of the MQTT?\n(Option: Message Queue Telemetry Transport, Message Queue Telemetry Things, Multi-Queue Telemetry Things, Multiple Queue Telemetry Things)", 
-    answer: "Message Queue Telemetry Transport" 
+  {
+    id: "f12",
+    category: CategoryType.FINAL,
+    question: "What is the full form of the MQTT?",
+    answer: "Message Queue Telemetry Transport",
+    options: [
+      "Message Queue Telemetry Transport",
+      "Message Queue Telemetry Things",
+      "Multi-Queue Telemetry Things",
+      "Multiple Queue Telemetry Things",
+    ],
+    explanation: "MQTT تعني Message Queue Telemetry Transport",
   },
-  { 
-    id: 'f13', 
-    category: CategoryType.FINAL, 
-    question: "Which architectures are reliant on middleware?\n(Option: client - server, Peer-to-peer, Master-slave, Distributed component)", 
-    answer: "Distributed component (البنية المعتمدة على المكونات الموزعة تعتمد بشكل أساسي على البرمجيات الوسيطة)" 
+  {
+    id: "f13",
+    category: CategoryType.FINAL,
+    question: "Which architectures are reliant on middleware?",
+    answer: "Distributed component",
+    options: [
+      "client - server",
+      "Peer-to-peer",
+      "Master-slave",
+      "Distributed component",
+    ],
+    explanation:
+      "البنية المعتمدة على المكونات الموزعة تعتمد بشكل أساسي على البرمجيات الوسيطة",
   },
-  { 
-    id: 'f14', 
-    category: CategoryType.FINAL, 
-    question: "Kafka maintains feeds of messages in categories called...\n(Option: Chunks, Topics, messages, domains)", 
-    answer: "Topics" 
+  {
+    id: "f14",
+    category: CategoryType.FINAL,
+    question: "Kafka maintains feeds of messages in categories called...",
+    answer: "Topics",
+    options: ["Chunks", "Topics", "messages", "domains"],
+    explanation: "كافكا يحتفظ برسائل في فئات تسمى المواضيع (Topics)",
   },
-  { 
-    id: 'f15', 
-    category: CategoryType.FINAL, 
-    question: "What is IoT?\n(Option: network of objects in the ring structure, network of physical objects embedded with sensors, network of virtual objects, network of sensors)", 
-    answer: "network of physical objects embedded with sensors" 
+  {
+    id: "f15",
+    category: CategoryType.FINAL,
+    question: "What is IoT?",
+    answer: "network of physical objects embedded with sensors",
+    options: [
+      "network of objects in the ring structure",
+      "network of physical objects embedded with sensors",
+      "network of virtual objects",
+      "network of sensors",
+    ],
+    explanation:
+      "إنترنت الأشياء هو شبكة من الأشياء الفيزيائية المدمجة مع أجهزة استشعار",
   },
-  { 
-    id: 'f16', 
-    category: CategoryType.FINAL, 
-    question: "________ is used to provide a partial ordering of events with minimal overhead.\n(Option: Passive time server algorithm, Token Based algorithm, Lamport algorithm, Ring Based algorithm)", 
-    answer: "Lamport algorithm" 
+  {
+    id: "f16",
+    category: CategoryType.FINAL,
+    question:
+      "________ is used to provide a partial ordering of events with minimal overhead.",
+    answer: "Lamport algorithm",
+    options: [
+      "Passive time server algorithm",
+      "Token Based algorithm",
+      "Lamport algorithm",
+      "Ring Based algorithm",
+    ],
+    explanation: "خوارزمية لامبورت تستخدم لتوفير ترتيب جزئي للأحداث بأقل جهد",
   },
-  { 
-    id: 'f17', 
-    category: CategoryType.FINAL, 
-    question: "What is the component of an IoT system that executes a program?\n(Option: A digital to analog converter, A sensor, An actuator, A microcontroller)", 
-    answer: "A microcontroller" 
+  {
+    id: "f17",
+    category: CategoryType.FINAL,
+    question: "What is the component of an IoT system that executes a program?",
+    answer: "A microcontroller",
+    options: [
+      "A digital to analog converter",
+      "A sensor",
+      "An actuator",
+      "A microcontroller",
+    ],
+    explanation: "المتحكم الدقيق هو المكون الذي ينفذ البرنامج في نظام IoT",
   },
-  { 
-    id: 'f18', 
-    category: CategoryType.FINAL, 
-    question: "A distributed system is a collection of ________ computing elements that appears to its users as a single coherent system.\n(Option: Autonomous, None of the mentioned, All of the mentioned, Dependent)", 
-    answer: "Autonomous (النظام الموزع هو مجموعة من العناصر الحاسوبية المستقلة)" 
+  {
+    id: "f18",
+    category: CategoryType.FINAL,
+    question:
+      "A distributed system is a collection of ________ computing elements that appears to its users as a single coherent system.",
+    answer: "Autonomous",
+    options: [
+      "Autonomous",
+      "None of the mentioned",
+      "All of the mentioned",
+      "Dependent",
+    ],
+    explanation: "النظام الموزع هو مجموعة من العناصر الحاسوبية المستقلة",
   },
-  { 
-    id: 'f19', 
-    category: CategoryType.FINAL, 
-    question: "Peer X is being choked by Peer Y in a Bittorrent network. Which of the following is true?\n(Option: Peer X cannot upload to Peer Y, Peer Y cannot download from Peer X, Peer X cannot download from Peer Y, Peer X can download from Peer Y)", 
-    answer: "Peer X cannot download from Peer Y (عندما يقوم Y بـ 'خنق' X، فإنه يرفض إرسال البيانات إليه)" 
-  }
+  {
+    id: "f19",
+    category: CategoryType.FINAL,
+    question:
+      "Peer X is being choked by Peer Y in a Bittorrent network. Which of the following is true?",
+    answer: "Peer X cannot download from Peer Y",
+    options: [
+      "Peer X cannot upload to Peer Y",
+      "Peer Y cannot download from Peer X",
+      "Peer X cannot download from Peer Y",
+      "Peer X can download from Peer Y",
+    ],
+    explanation: "عندما يقوم Y بـ 'خنق' X، فإنه يرفض إرسال البيانات إليه",
+  },
 ];
