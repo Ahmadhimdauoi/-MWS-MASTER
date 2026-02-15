@@ -1,9 +1,9 @@
-
 export enum CategoryType {
-  WEB = 'Web Programming & Design',
-  ALGO = 'Programming & Algorithms',
-  NETWORK = 'Networks',
-  COMPILER = 'Languages & Compilers'
+  WEB = "Web Programming & Design",
+  ALGO = "Programming & Algorithms",
+  NETWORK = "Networks",
+  COMPILER = "Languages & Compilers",
+  FINAL = "Final Exam",
 }
 
 export interface Question {
