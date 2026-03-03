@@ -17,6 +17,9 @@ import { QUESTIONS } from "./constants";
 // --- Question Card ---
 const QuestionCard = ({ question }: { question: Question }) => {
   const [showAnswer, setShowAnswer] = useState(false);
+  const isEnglish =
+    question.category === CategoryType.FINAL ||
+    /^[A-Za-z0-9]/.test(question.question);
 
   return (
     <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden group hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-50/50 transition-all duration-300 flex flex-col">
@@ -26,16 +29,18 @@ const QuestionCard = ({ question }: { question: Question }) => {
             {question.category}
           </span>
         </div>
-        <h3 className="text-lg font-bold text-slate-800 leading-relaxed mb-6 group-hover:text-indigo-900 transition-colors">
+        <h3
+          className={`text-lg font-bold text-slate-800 leading-relaxed mb-6 group-hover:text-indigo-900 transition-colors ${isEnglish ? "text-left" : "text-right"}`}
+          dir={isEnglish ? "ltr" : "rtl"}>
           {question.question}
         </h3>
 
         {question.options && (
-          <div className="mb-6 space-y-2">
+          <div className="mb-6 space-y-2" dir={isEnglish ? "ltr" : "rtl"}>
             {question.options.map((opt, i) => (
               <div
                 key={i}
-                className="text-sm p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600">
+                className={`text-sm p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 ${isEnglish ? "text-left" : "text-right"}`}>
                 {opt}
               </div>
             ))}
@@ -44,17 +49,21 @@ const QuestionCard = ({ question }: { question: Question }) => {
 
         {showAnswer ? (
           <div className="p-5 bg-indigo-50 rounded-2xl border border-indigo-100 text-indigo-900 animate-in fade-in zoom-in-95 duration-300">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2" dir="rtl">
               <CheckCircle2 size={16} className="text-indigo-600" />
               <span className="text-xs font-black uppercase tracking-widest opacity-50">
                 الإجابة النموذجية
               </span>
             </div>
-            <p className="font-bold text-[16px] leading-relaxed mb-2">
+            <p
+              className={`font-bold text-[16px] leading-relaxed mb-2 ${isEnglish ? "text-left" : "text-right"}`}
+              dir={isEnglish ? "ltr" : "rtl"}>
               {question.answer}
             </p>
             {question.explanation && (
-              <p className="text-sm opacity-80 border-t border-indigo-100 pt-2 mt-2 italic">
+              <p
+                className="text-sm opacity-80 border-t border-indigo-100 pt-2 mt-2 italic text-right"
+                dir="rtl">
                 {question.explanation}
               </p>
             )}
@@ -165,6 +174,8 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
 
   const q = quizQuestions[currentIdx];
   const hasOptions = q.options && q.options.length > 0;
+  const isEnglish =
+    q.category === CategoryType.FINAL || /^[A-Za-z0-9]/.test(q.question);
 
   return (
     <div className="max-w-2xl mx-auto py-8 px-4">
@@ -181,7 +192,9 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
         </div>
       </div>
       <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-200 mb-8 min-h-[350px] flex flex-col">
-        <p className="text-2xl font-bold text-center text-slate-800 leading-relaxed mb-10">
+        <p
+          className={`text-2xl font-bold text-slate-800 leading-relaxed mb-10 ${isEnglish ? "text-left" : "text-center"}`}
+          dir={isEnglish ? "ltr" : "rtl"}>
           {q.question}
         </p>
 
@@ -216,7 +229,8 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
                     key={idx}
                     disabled={isAnswered}
                     onClick={() => handleOptionSelect(option)}
-                    className={`w-full p-6 text-right rounded-2xl border-2 transition-all font-bold text-lg flex items-center justify-between ${buttonStyle}`}>
+                    dir={isEnglish ? "ltr" : "rtl"}
+                    className={`w-full p-6 rounded-2xl border-2 transition-all font-bold text-lg flex items-center justify-between ${isEnglish ? "text-left" : "text-right"} ${buttonStyle}`}>
                     <span>{option}</span>
                     {isAnswered && isCorrectOption && (
                       <CheckCircle2 size={24} className="text-emerald-500" />
@@ -230,14 +244,16 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
             </div>
 
             {isAnswered && (
-              <div className="mt-8 p-6 bg-slate-50 rounded-3xl border border-slate-100 animate-in fade-in slide-in-from-top-4">
-                <p className="text-slate-800 font-bold mb-2 text-xl">
+              <div
+                className="mt-8 p-6 bg-slate-50 rounded-3xl border border-slate-100 animate-in fade-in slide-in-from-top-4"
+                dir="rtl">
+                <p className="text-slate-800 font-bold mb-2 text-xl text-right">
                   {selectedOption?.toLowerCase() === q.answer.toLowerCase()
                     ? "إجابة صحيحة! 🎉"
                     : "إجابة خاطئة ❌"}
                 </p>
                 {q.explanation && (
-                  <p className="text-slate-600 leading-relaxed text-lg">
+                  <p className="text-slate-600 leading-relaxed text-lg text-right">
                     {q.explanation}
                   </p>
                 )}
@@ -259,11 +275,15 @@ const QuizMode = ({ questions }: { questions: Question[] }) => {
               </button>
             ) : (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-                <div className="p-6 bg-indigo-600 text-white rounded-3xl text-center font-bold text-xl">
+                <div
+                  className={`p-6 bg-indigo-600 text-white rounded-3xl font-bold text-xl ${isEnglish ? "text-left" : "text-center"}`}
+                  dir={isEnglish ? "ltr" : "rtl"}>
                   {q.answer}
                 </div>
                 {q.explanation && (
-                  <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-600">
+                  <div
+                    className="p-6 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-600 text-right"
+                    dir="rtl">
                     {q.explanation}
                   </div>
                 )}
@@ -302,11 +322,22 @@ const Sidebar = ({
     />
     <aside
       className={`fixed top-0 bottom-0 right-0 w-72 bg-white border-l z-50 transition-transform lg:translate-x-0 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
-      <div className="p-8 border-b font-black text-xl text-indigo-600 flex items-center gap-2">
-        <div className="w-8 h-8 bg-indigo-600 text-white flex items-center justify-center rounded-lg">
-          M
+      <div className="p-6 border-b flex flex-col gap-4">
+        <div className="font-black text-xl text-indigo-600 flex items-center gap-2">
+          <div className="w-8 h-8 bg-indigo-600 text-white flex items-center justify-center rounded-lg">
+            M
+          </div>
+          <span>MWS MASTER</span>
         </div>
-        <span>MWS MASTER</span>
+        <div
+          className="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1 text-right"
+          dir="rtl">
+          <div className="text-sm font-black text-slate-800">م.أحمد هنداوي</div>
+          <div className="text-xs font-bold text-emerald-600 flex items-center gap-1">
+            <span dir="ltr">0992803187</span>
+            <span className="text-slate-400">- واتساب</span>
+          </div>
+        </div>
       </div>
       <nav className="p-4 space-y-1">
         {[
