@@ -1063,20 +1063,6 @@ export const QUESTIONS: Question[] = [
     answer: "عنوان رقمي فريد يحدد هوية الجهاز على الشبكة (مثل 192.168.1.1).",
   },
   {
-    id: "n154",
-    category: CategoryType.NETWORK,
-    question: "ما الفرق الجوهري بين TCP و UDP؟",
-    answer:
-      "TCP موثوق ويؤكد استلام البيانات، UDP سريع ولا يضمن الاستلام (يستخدم للبث المباشر).",
-  },
-  {
-    id: "n155",
-    category: CategoryType.NETWORK,
-    question: "ما هو نظام DNS؟",
-    answer:
-      "Domain Name System - يعمل كدليل هاتف يحول أسماء المواقع (مثل google.com) إلى عناوين IP.",
-  },
-  {
     id: "n156",
     category: CategoryType.NETWORK,
     question: "ما هو بروتوكول HTTP؟",
@@ -1154,13 +1140,6 @@ export const QUESTIONS: Question[] = [
       "Border Gateway Protocol - بروتوكول توجيه أساسي يربط بين الشبكات الكبرى على الإنترنت.",
   },
   {
-    id: "n167",
-    category: CategoryType.NETWORK,
-    question: "ما هو بروتوكول DHCP؟",
-    answer:
-      "Dynamic Host Configuration Protocol - يقوم بتوزيع عناوين IP تلقائياً للأجهزة عند اتصالها بالشبكة.",
-  },
-  {
     id: "n168",
     category: CategoryType.NETWORK,
     question: "ما هو الـ Socket؟",
@@ -1180,13 +1159,6 @@ export const QUESTIONS: Question[] = [
     question: "ما هو بروتوكول OSPF؟",
     answer:
       "بروتوكول توجيه داخلي فعال يختار أقصر مسار بناءً على حالة الوصلة (Link State).",
-  },
-  {
-    id: "n171",
-    category: CategoryType.NETWORK,
-    question: "ما وظيفة الـ VPN؟",
-    answer:
-      "إنشاء قناة اتصال مشفرة وآمنة عبر شبكة عامة (مثل الإنترنت) لحماية الخصوصية.",
   },
   {
     id: "n172",
@@ -1417,25 +1389,11 @@ export const QUESTIONS: Question[] = [
       "تصميم يتكيف مع أحجام شاشات مختلفة باستخدام وحدات مرنة (مثل %، rem) وMedia Queries.",
   },
   {
-    id: "w209",
-    category: CategoryType.WEB,
-    question: "ما دور Media Queries في CSS؟",
-    answer:
-      "تُستخدم لتطبيق أنماط مختلفة بناءً على خصائص الجهاز (مثل العرض، الارتفاع، الاتجاه).",
-  },
-  {
     id: "w211",
     category: CategoryType.WEB,
     question: "ما الفرق بين ID و Class في HTML؟",
     answer:
       "ID فريد ويُستخدم لعنصر واحد فقط، بينما يمكن استخدام Class لأكثر من عنصر.",
-  },
-  {
-    id: "w214",
-    category: CategoryType.WEB,
-    question: "ما الفرق بين GET و POST في طلبات HTTP؟",
-    answer:
-      "GET تُرسل البيانات عبر الرابط (URL) وتُستخدم للاستعلام، POST تُرسل البيانات في جسم الطلب وتُستخدم لإرسال بيانات حساسة أو كبيرة.",
   },
   {
     id: "w215",
@@ -1512,14 +1470,6 @@ export const QUESTIONS: Question[] = [
     answer:
       "نسخة آمنة من HTTP تستخدم التشفير (SSL/TLS) لحماية البيانات أثناء النقل.",
   },
-
-  {
-    id: "a228",
-    category: CategoryType.ALGO,
-    question: "ما هو Big O Notation؟",
-    answer:
-      "تدوين رياضي يُستخدم لوصف الحد الأعلى لتعقيد الخوارزمية (مثل O(n), O(log n)).",
-  },
   {
     id: "a229",
     category: CategoryType.ALGO,
@@ -1560,13 +1510,6 @@ export const QUESTIONS: Question[] = [
       "Array حجمه ثابت، بينما List (مثل ArrayList في Java) حجمه ديناميكي.",
   },
   {
-    id: "a237",
-    category: CategoryType.ALGO,
-    question: "ما هو Binary Search؟",
-    answer:
-      "خوارزمية بحث فعالة تعمل على المصفوفات المرتبة بتعقيد زمني O(log n).",
-  },
-  {
     id: "a238",
     category: CategoryType.ALGO,
     question: "ما هو Bubble Sort؟",
@@ -1601,13 +1544,6 @@ export const QUESTIONS: Question[] = [
       "كتلة من التعليمات تُنفذ عند استدعائها، ويمكن أن تأخذ مدخلات وتعيد مخرجات.",
   },
   {
-    id: "a244",
-    category: CategoryType.ALGO,
-    question: "ما هو Scope في البرمجة؟",
-    answer:
-      "النطاق الذي تكون فيه المتغيرات مرئية وقابلة للاستخدام (محلي، عام...).",
-  },
-  {
     id: "a245",
     category: CategoryType.ALGO,
     question: "ما هو الـ Parameter؟ وما الفرق بينه وبين Argument؟",
@@ -1633,12 +1569,6 @@ export const QUESTIONS: Question[] = [
     question: "ما الفرق بين Static Typing و Dynamic Typing؟",
     answer:
       "في Static Typing (مثل Java) يجب تحديد نوع المتغير عند التصريح، بينما في Dynamic Typing (مثل Python) يُحدد النوع عند التشغيل.",
-  },
-  {
-    id: "a249",
-    category: CategoryType.ALGO,
-    question: "ما هو الـ Debugging؟",
-    answer: "عملية اكتشاف وإصلاح الأخطاء (Bugs) في الكود.",
   },
   {
     id: "a250",
@@ -1694,19 +1624,6 @@ export const QUESTIONS: Question[] = [
     answer: "الطبقة الرابعة، مسؤولة عن نقل البيانات بين الأجهزة (مثل TCP/UDP).",
   },
   {
-    id: "n267",
-    category: CategoryType.NETWORK,
-    question: "ما هو Bandwidth؟",
-    answer:
-      "كمية البيانات التي يمكن نقلها عبر الشبكة في وحدة زمنية (تقاس بـ Mbps).",
-  },
-  {
-    id: "n268",
-    category: CategoryType.NETWORK,
-    question: "ما هو Latency؟",
-    answer: "التأخير الزمني بين إرسال طلب واستلام الرد.",
-  },
-  {
     id: "n270",
     category: CategoryType.NETWORK,
     question: "ما هو Traceroute؟",
@@ -1729,13 +1646,6 @@ export const QUESTIONS: Question[] = [
     category: CategoryType.NETWORK,
     question: "ما هو Multicast؟",
     answer: "إرسال رسالة إلى مجموعة محددة من الأجهزة.",
-  },
-  {
-    id: "n275",
-    category: CategoryType.NETWORK,
-    question: "ما هو ARP؟",
-    answer:
-      "Address Resolution Protocol، يُستخدم للحصول على MAC Address من IP Address.",
   },
 
   {
@@ -1855,13 +1765,6 @@ export const QUESTIONS: Question[] = [
     category: CategoryType.COMPILER,
     question: "ما هو Library؟",
     answer: "مجموعة من الدوال أو الكلاسات الجاهزة لإعادة الاستخدام.",
-  },
-  {
-    id: "c296",
-    category: CategoryType.COMPILER,
-    question: "ما هو Framework؟",
-    answer:
-      "هيكل أساسي يوفر بنية جاهزة لبناء التطبيقات، غالباً يتحكم في سير التنفيذ.",
   },
   {
     id: "c297",
