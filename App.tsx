@@ -453,7 +453,8 @@ export default function App() {
                     {category === "all" ? "دليل الدراسة الكامل" : category}
                   </h1>
                   <p className="text-slate-500">
-                    مراجعة شاملة لـ 400 سؤال وجواب لمفاضلة ماجستير علوم الويب.
+                    مراجعة شاملة لـ {QUESTIONS.length} سؤال وجواب لمفاضلة
+                    ماجستير علوم الويب.
                   </p>
                 </div>
                 <div className="relative w-full max-w-sm">
